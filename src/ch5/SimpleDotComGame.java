@@ -1,12 +1,28 @@
 package ch5;
 
+import java.util.Scanner;
+
 public class SimpleDotComGame {
+    static Scanner scanner = new Scanner(System.in);
+
     public static void main(String[] args) {
-        // start the game
-        // create the three dot com
-        // put the three dot com into the grid
-        // ask the user to guess
-        // check the guesses
-        // repeat until all three cells are hit
+        DefaultSimpleDotCom dot = new DefaultSimpleDotCom();
+        boolean isAlive = true;
+        int numberOfUserGuesses = 0;
+        int randomNum = (int) (Math.random() * 5);
+        int[] locations = {randomNum, randomNum + 1, randomNum + 2};
+        dot.setLocationCells(locations);
+        while (isAlive) {
+            System.out.print("Enter a number: ");
+            String userGuess = scanner.next();
+            String result = dot.checkYourSelf(userGuess);
+            numberOfUserGuesses++;
+            if (result.equalsIgnoreCase("kill")) {
+                isAlive = false;
+                System.out.println("Number of user guesses: " + numberOfUserGuesses);
+            }
+
+        }
     }
+
 }
